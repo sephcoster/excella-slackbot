@@ -34,6 +34,8 @@ Scripts deployed to this Hubot include:
 * Yoda Quotes / Pictures
 * JavaScript Eval
 
+[See source scripts for details](https://github.com/github/hubot-scripts/tree/master/src/scripts)
+
 # Hubot
 
 This is a version of GitHub's Campfire bot, hubot. He's pretty cool.
