@@ -19,7 +19,8 @@ quotes = [
   "And if none of that works, you can always quietly revel in your own superiority.",
   "We don't want to be corn, we want to be tomatoes!",
   "I'm an introvert, that's why I asked to be seated alone at a table that holds 12 people...",
-  "It's like bringing champagne to a funeral..."
+  "It's like bringing champagne to a funeral...",
+  "I yield the rest of my time to the singing Rabbi."
 ]
 
 module.exports = (robot) ->
