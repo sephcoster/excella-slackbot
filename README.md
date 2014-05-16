@@ -1,3 +1,31 @@
+# Hubot for Excella, on Slack
+
+This particular flavor of Hubot was designed to be deployed to Heroku to support a Slack chat instance for @ExcellaCo.
+
+Scripts deployed currently include:
+* Ship It
+* Ackbar
+* Achievement Unlocked
+* Wunderground
+* Forecast.io Weather
+* XKCD
+* CorgiMe
+* Chuck Norris
+* Do It Live
+* Emoji Me
+* Excuse
+* Gob
+* Eval
+* Facepalm
+* Faceup
+* Flying-High
+* Giphy
+* ScrumNotes
+* Kittens
+* Look of Disapproval
+* Yoda Quotes / Pictures
+* JavaScript Eval
+
 # Hubot
 
 This is a version of GitHub's Campfire bot, hubot. He's pretty cool.
