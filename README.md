@@ -2,7 +2,15 @@
 
 This particular flavor of Hubot was designed to be deployed to Heroku to support a Slack chat instance for @ExcellaCo.
 
-Scripts deployed currently include:
+For additional information about how to deploy Hubot for slack, see TinySpeck's GitHub Repo:
+https://github.com/tinyspeck/hubot-slack
+
+To view existing integrations and configure them, please go to [Subdomain].slack.com/services and ensure your Heroku variables are configured correctly to support.  
+
+Thought the TinySpeck instructions allow you to specify a name, it is key to use the name provided to you by the Slack integrations console - in our case, the bot would not work unless it was integrated with Slackbot, and named the same.
+
+# Scripts Currently Deployed
+Scripts deployed to this Hubot include:
 * Ship It
 * Ackbar
 * Achievement Unlocked
