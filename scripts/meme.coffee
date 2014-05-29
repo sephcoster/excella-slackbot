@@ -1,224 +1,133 @@
 # Description:
-#   Integrates with memegenerator.net
+#   Get a meme from http://memecaptain.com/
 #
 # Dependencies:
 #   None
 #
-# Configuration:
-#   HUBOT_MEMEGEN_USERNAME
-#   HUBOT_MEMEGEN_PASSWORD
-#   HUBOT_MEMEGEN_DIMENSIONS
-#
 # Commands:
-#   hubot memegen Y U NO <text>  - Generates the Y U NO GUY with the bottom caption of <text>
-#   hubot memegen I don't always <something> but when i do <text> - Generates The Most Interesting man in the World
-#   hubot memegen <text> ORLY? - Generates the ORLY? owl with the top caption of <text>
-#   hubot memegen <text> (SUCCESS|NAILED IT) - Generates success kid with the top caption of <text>
-#   hubot memegen <text> ALL the <things> - Generates ALL THE THINGS
-#   hubot memegen <text> TOO DAMN <high> - Generates THE RENT IS TOO DAMN HIGH guy
-#   hubot memegen good news everyone! <news> - Generates Professor Farnsworth
-#   hubot memegen khanify <text> - TEEEEEEEEEEEEEEEEEXT!
-#   hubot memegen Not sure if <text> or <text> - Generates Futurama Fry
-#   hubot memegen Yo dawg <text> so <text> - Generates Yo Dawg
-#   hubot memegen ALL YOUR <text> ARE BELONG TO US - Generates Zero Wing with the caption of <text>
-#   hubot memegen if <text>, <word that can start a question> <text>? - Generates Philosoraptor
-#   hubot memegen (Oh|You) <text> (Please|Tell) <text> - Willy Wonka
-#   hubot memegen <text> you're gonna have a bad time - Bad Time Ski Instructor
-#   hubot memegen one does not simply <text> - Lord of the Rings Boromir
-#   hubot memegen it looks like (you|you're) <text> - Generates Clippy
-#   hubot memegen AM I THE ONLY ONE AROUND HERE <text> - The Big Lebowski
-#   hubot memegen <text> NOT IMPRESSED - Generates McKayla Maroney
-#   hubot memegen PREPARE YOURSELF <text> - Generates GoT
-#   hubot memegen WHAT IF I TOLD YOU <text> - Generates Morpheus
+#   hubot Y U NO <text> - Generates the Y U NO GUY with the bottom caption of <text>
+#   hubot I don't always <something> but when i do <text> - Generates The Most Interesting man in the World
+#   hubot <text> (SUCCESS|NAILED IT) - Generates success kid with the top caption of <text>
+#   hubot <text> ALL the <things> - Generates ALL THE THINGS
+#   hubot <text> TOO DAMN <high> - Generates THE RENT IS TOO DAMN HIGH guy
+#   hubot Yo dawg <text> so <text> - Generates Yo Dawg
+#   hubot All your <text> are belong to <text> - All your <text> are belong to <text>
+#   hubot If <text>, <word that can start a question> <text>? - Generates Philosoraptor
+#   hubot <text>, BITCH PLEASE <text> - Generates Yao Ming
+#   hubot <text>, COURAGE <text> - Generates Courage Wolf
+#   hubot ONE DOES NOT SIMPLY <text> - Generates Boromir
+#   hubot IF YOU <text> GONNA HAVE A BAD TIME - Ski Instructor
+#   hubot IF YOU <text> TROLLFACE <text> - Troll Face
+#   hubot Aliens guy <text> - Aliens guy weighs in on something
+#   hubot Brace yourself <text> - Ned Stark braces for <text>
+#   hubot Iron Price <text> - To get <text>? Pay the iron price!
+#   hubot Not sure if <something> or <something else> - Generates a Futurama Fry meme
+#   hubot <text>, AND IT'S GONE - Bank Teller
+#   hubot WHAT IF I TOLD YOU <text> - Morpheus What if I told you
+#
 # Author:
-#   skalnik
-
-
-inspect = require('util').inspect
+#   bobanj
 
 module.exports = (robot) ->
-  unless robot.brain.data.memes?
-    robot.brain.data.memes = [
-      {
-        regex: /(memegen )?(Y U NO) (.+)/i,
-        generatorID: 2,
-        imageID: 166088
-      },
-      {
-        regex: /(memegen )?(I DON'?T ALWAYS .*) (BUT WHEN I DO,? .*)/i,
-        generatorID: 74,
-        imageID: 2485
-      },
-      {
-        regex: /(memegen )?(.*)(O\s?RLY\??.*)/i,
-        generatorID: 920,
-        imageID: 117049
-      },
-      {
-        regex: /(memegen )?(.*)(SUCCESS|NAILED IT.*)/i,
-        generatorID: 121,
-        imageID: 1031
-      },
-      {
-        regex: /(memegen )?(.*) (ALL the .*)/i,
-        generatorID: 6013,
-        imageID: 1121885
-      },
-      {
-        regex: /(memegen )?(.*) (\w+\sTOO DAMN .*)/i,
-        generatorID: 998,
-        imageID: 203665
-      },
-      {
-        regex: /(memegen )?(GOOD NEWS EVERYONE[,.!]?) (.*)/i,
-        generatorID: 1591,
-        imageID: 112464
-      },
-      {
-        regex: /(memegen )?(NOT SURE IF .*) (OR .*)/i,
-        generatorID: 305,
-        imageID: 84688
-      },
-      {
-        regex: /(memegen )?(YO DAWG .*) (SO .*)/i,
-        generatorID: 79,
-        imageID: 108785
-      },
-      {
-        regex: /(memegen )?(ALL YOUR .*) (ARE BELONG TO US)/i,
-        generatorID: 349058,
-        imageID: 2079825
-      },
-      {
-        regex: /(memegen )?(.*) (You'?re gonna have a bad time)/i,
-        generatorID: 825296,
-        imageID: 3786537
-      },
-      {
-        regex: /(memegen )?(one does not simply) (.*)/i,
-        generatorID: 274947,
-        imageID: 1865027
-      },
-      {
-        regex: /(memegen )?(grumpy cat) (.*),(.*)/i,
-        generatorID: 1590955,
-        imageID: 6541210
-      },
-      {
-        regex: /(memegen )?(it looks like you're|it looks like you) (.*)/i,
-        generatorID: 20469,
-        imageID: 1159769
-      },
-      {
-        regex: /(memegen )?(AM I THE ONLY ONE AROUND HERE) (.*)/i,
-        generatorID: 953639,
-        imageID: 4240352
-      }
-      {
-        regex: /(memegen)?(.*)(NOT IMPRESSED*)/i,
-        generatorID: 1420809,
-        imageID: 5883168
-      },
-      {
-        regex: /(memegen)?(PREPARE YOURSELF) (.*)/i,
-        generatorID: 414926,
-        imageID: 2295701
-      },
-      {
-        regex: /(memegen)?(WHAT IF I TOLD YOU) (.*)/i,
-        generatorID: 1118843,
-        imageID: 4796874
-      }
-    ]
+  robot.respond /Y U NO (.+)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/y_u_no.jpg', 'Y U NO', msg.match[1], (url) ->
+      msg.send url
 
-  for meme in robot.brain.data.memes
-    memeResponder robot, meme
+  robot.respond /iron price (.+)/i, (msg) ->
+    memeGenerator msg, 'http://imgur.com/nqVZQel.jpg', msg.match[1], 'Pay the iron price', (url) ->
+      msg.send url
 
-  robot.respond /(memegen )?add meme \/(.+)\/i,(.+),(.+)/i, (msg) ->
-    meme =
-      regex: new RegExp(msg.match[2], "i")
-      generatorID: parseInt(msg.match[3])
-      imageID: parseInt(msg.match[4])
+  robot.respond /aliens guy (.+)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/aliens.jpg', msg.match[1], '', (url) ->
+      msg.send url
 
-    robot.brain.data.memes.push meme
-    memeResponder robot, meme
+  robot.respond /brace yourself (.+)/i, (msg) ->
+    memeGenerator msg, 'http://i.imgur.com/cOnPlV7.jpg', 'Brace Yourself', msg.match[1], (url) ->
+      msg.send url
 
-  robot.respond /(memegen )?k(?:ha|ah)nify (.*)/i, (msg) ->
-    if Math.random() > 0.5
-      # Kirk khan
-      memeGenerator msg, 6443, 1123022, "", khanify(msg.match[2]), (url) ->
-        msg.send url
+  robot.respond /(.*) (ALL the .*)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/all_the_things.jpg', msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /(I DON'?T ALWAYS .*) (BUT WHEN I DO,? .*)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/most_interesting.jpg', msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /(.*)(SUCCESS|NAILED IT.*)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/success_kid.jpg', msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /(.*) (\w+\sTOO DAMN .*)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/too_damn_high.jpg', msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /(NOT SURE IF .*) (OR .*)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/fry.png', msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /(YO DAWG .*) (SO .*)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/xzibit.jpg', msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /(All your .*) (are belong to .*)/i, (msg) ->
+    memeGenerator msg, 'http://i.imgur.com/gzPiQ8R.jpg', msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /(.*)\s*BITCH PLEASE\s*(.*)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/yao_ming.jpg', msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /(.*)\s*COURAGE\s*(.*)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/courage_wolf.jpg', msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /ONE DOES NOT SIMPLY (.*)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/boromir.jpg', 'ONE DOES NOT SIMPLY', msg.match[1], (url) ->
+      msg.send url
+
+  robot.respond /(IF YOU .*\s)(.* GONNA HAVE A BAD TIME)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/bad_time.jpg', msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /(.*)TROLLFACE(.*)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/troll_face.jpg', msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /(IF .*), ((ARE|CAN|DO|DOES|HOW|IS|MAY|MIGHT|SHOULD|THEN|WHAT|WHEN|WHERE|WHICH|WHO|WHY|WILL|WON\'T|WOULD)[ \'N].*)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/philosoraptor.jpg', msg.match[1], msg.match[2] + (if msg.match[2].search(/\?$/)==(-1) then '?' else ''), (url) ->
+      msg.send url
+
+  robot.respond /(.*)(AND IT\'S GONE.*)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/src_images/uIZe3Q.jpg', msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /WHAT IF I TOLD YOU (.*)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/src_images/fWle1w.png', 'WHAT IF I TOLD YOU', msg.match[1], (url) ->
+      msg.send url
+
+memeGenerator = (msg, imageName, text1, text2, callback) ->
+  imageUrl = imageName
+
+  processResult = (err, res, body) ->
+    return msg.send err if err
+    if res.statusCode == 301
+      msg.http(res.headers.location).get() processResult
+      return
+    if res.statusCode > 300
+      msg.reply "Sorry, I couldn't generate that meme. Unexpected status from memecaption.com: #{res.statusCode}"
+      return
+    try
+      result = JSON.parse(body)
+    catch error
+      msg.reply "Sorry, I couldn't generate that meme. Unexpected response from memecaptain.com: #{body}"
+    if result? and result['imageUrl']?
+      callback result['imageUrl']
     else
-      # Spock khan
-      memeGenerator msg, 2103732, 8814557, "", khanify(msg.match[2]), (url) ->
-        msg.send url
+      msg.reply "Sorry, I couldn't generate that meme."
 
-
-  robot.respond /(memegen )?(IF .*), ((ARE|CAN|DO|DOES|HOW|IS|MAY|MIGHT|SHOULD|THEN|WHAT|WHEN|WHERE|WHICH|WHO|WHY|WILL|WON\'T|WOULD)[ \'N].*)/i, (msg) ->
-    memeGenerator msg, 17, 984, msg.match[2], msg.match[3] + (if msg.match[3].search(/\?$/)==(-1) then '?' else ''), (url) ->
-      msg.send url
-
-  robot.respond /(memegen )?((Oh|You) .*) ((Please|Tell) .*)/i, (msg) ->
-    memeGenerator msg, 542616, 2729805, msg.match[2], msg.match[4], (url) ->
-      msg.send url
-
-memeResponder = (robot, meme) ->
-  robot.respond meme.regex, (msg) ->
-    memeGenerator msg, meme.generatorID, meme.imageID, msg.match[2], msg.match[3], (url) ->
-      msg.send url
-
-memeGenerator = (msg, generatorID, imageID, text0, text1, callback) ->
-  username = process.env.HUBOT_MEMEGEN_USERNAME
-  password = process.env.HUBOT_MEMEGEN_PASSWORD
-  preferredDimensions = process.env.HUBOT_MEMEGEN_DIMENSIONS
-
-  unless username? and password?
-    msg.send "MemeGenerator account isn't setup. Sign up at http://memegenerator.net"
-    msg.send "Then ensure the HUBOT_MEMEGEN_USERNAME and HUBOT_MEMEGEN_PASSWORD environment variables are set"
-    return
-
-  msg.http('http://version1.api.memegenerator.net/Instance_Create')
-    .query
-      username: username,
-      password: password,
-      languageCode: 'en',
-      generatorID: generatorID,
-      imageID: imageID,
-      text0: text0,
-      text1: text1
-    .get() (err, res, body) ->
-      if err
-        msg.reply "Ugh, I got an exception trying to contact memegenerator.net:", inspect(err)
-        return
-
-      jsonBody = JSON.parse(body)
-      success = jsonBody.success
-      errorMessage = jsonBody.errorMessage
-      result = jsonBody.result
-
-      if not success
-        msg.reply "Ugh, stupid request to memegenerator.net failed: \"#{errorMessage}.\" What does that even mean?"
-        return
-
-      instanceID = result?.instanceID
-      instanceURL = result?.instanceUrl
-      img = result?.instanceImageUrl
-
-      unless instanceID and instanceURL and img
-        msg.reply "Ugh, I got back weird results from memegenerator.net. Expected an image URL, but couldn't find it in the result. Here's what I got:", inspect(jsonBody)
-        return
-
-      msg.http(instanceURL).get() (err, res, body) ->
-        # Need to hit instanceURL so that image gets generated
-        if preferredDimensions?
-          callback "http://images.memegenerator.net/instances/#{preferredDimensions}/#{instanceID}.jpg"
-        else
-          callback "http://images.memegenerator.net/instances/#{instanceID}.jpg"
-
-khanify = (msg) ->
-  msg = msg.toUpperCase()
-  vowels = [ 'A', 'E', 'I', 'O', 'U' ]
-  index = -1
-  for v in vowels when msg.lastIndexOf(v) > index
-    index = msg.lastIndexOf(v)
-  "#{msg.slice 0, index}#{Array(10).join msg.charAt(index)}#{msg.slice index}!!!!!"
+  msg.http("http://memecaptain.com/g")
+  .query(
+    u: imageUrl,
+    t1: text1,
+    t2: text2
+  ).get() processResult
