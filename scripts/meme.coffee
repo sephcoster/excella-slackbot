@@ -24,6 +24,7 @@
 #   hubot Not sure if <something> or <something else> - Generates a Futurama Fry meme
 #   hubot <text>, AND IT'S GONE - Bank Teller
 #   hubot WHAT IF I TOLD YOU <text> - Morpheus What if I told you
+#   hubot Good News Everyone! <text> - Futurama Good News
 #
 # Author:
 #   bobanj
@@ -53,6 +54,7 @@ module.exports = (robot) ->
     memeGenerator msg, 'http://memecaptain.com/most_interesting.jpg', msg.match[1], msg.match[2], (url) ->
       msg.send url
 
+  robot.respond / 
   robot.respond /(.*)(SUCCESS|NAILED IT.*)/i, (msg) ->
     memeGenerator msg, 'http://memecaptain.com/success_kid.jpg', msg.match[1], msg.match[2], (url) ->
       msg.send url
@@ -60,6 +62,10 @@ module.exports = (robot) ->
   robot.respond /(.*) (\w+\sTOO DAMN .*)/i, (msg) ->
     memeGenerator msg, 'http://memecaptain.com/too_damn_high.jpg', msg.match[1], msg.match[2], (url) ->
       msg.send url
+
+  robot.respond /Good News Everyone! (.*)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/src_images/7SthVg', 'Good News Everyone!', msg.match[1], (url) ->
+      msg.send url    
 
   robot.respond /(NOT SURE IF .*) (OR .*)/i, (msg) ->
     memeGenerator msg, 'http://memecaptain.com/fry.png', msg.match[1], msg.match[2], (url) ->

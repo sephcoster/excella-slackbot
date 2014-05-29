@@ -9,6 +9,10 @@ To view existing integrations and configure them, please go to [Subdomain].slack
 
 Thought the TinySpeck instructions allow you to specify a name, it is key to use the name provided to you by the Slack integrations console - in our case, the bot would not work unless it was integrated with Slackbot, and named the same.
 
+To test locally, make sure Redis is installed `brew redis`, then start the local redis server using `redis-server /usr/local/etc/redis.conf`.
+
+Next, in the bot directory, run `bin/hubot`.
+
 # Scripts Currently Deployed
 Scripts deployed to this Hubot include:
 * Ship It
