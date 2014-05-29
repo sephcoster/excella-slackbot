@@ -34,6 +34,10 @@ module.exports = (robot) ->
     memeGenerator msg, 'http://memecaptain.com/y_u_no.jpg', 'Y U NO', msg.match[1], (url) ->
       msg.send url
 
+  robot.respond /WONKA (.*)\s*How trite.\s*(.*)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/src_images/Mp3Hwg', msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
   robot.respond /iron price (.+)/i, (msg) ->
     memeGenerator msg, 'http://imgur.com/nqVZQel.jpg', msg.match[1], 'Pay the iron price', (url) ->
       msg.send url
@@ -47,14 +51,13 @@ module.exports = (robot) ->
       msg.send url
 
   robot.respond /(.*) (ALL the .*)/i, (msg) ->
-    memeGenerator msg, 'http://memecaptain.com/all_the_things.jpg', msg.match[1], msg.match[2], (url) ->
+    memeGenerator msg, 'https://drupal.org/files/x-all-the-things-template.png', msg.match[1], msg.match[2], (url) ->
       msg.send url
 
   robot.respond /(I DON'?T ALWAYS .*) (BUT WHEN I DO,? .*)/i, (msg) ->
     memeGenerator msg, 'http://memecaptain.com/most_interesting.jpg', msg.match[1], msg.match[2], (url) ->
       msg.send url
 
-  robot.respond / 
   robot.respond /(.*)(SUCCESS|NAILED IT.*)/i, (msg) ->
     memeGenerator msg, 'http://memecaptain.com/success_kid.jpg', msg.match[1], msg.match[2], (url) ->
       msg.send url
