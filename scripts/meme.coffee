@@ -25,6 +25,7 @@
 #   hubot <text>, AND IT'S GONE - Bank Teller
 #   hubot WHAT IF I TOLD YOU <text> - Morpheus What if I told you
 #   hubot Good News Everyone! <text> - Futurama Good News
+#   hubot WONKA <text> | <text> - Condescending Wonka.
 #
 # Author:
 #   bobanj
@@ -34,7 +35,11 @@ module.exports = (robot) ->
     memeGenerator msg, 'http://memecaptain.com/y_u_no.jpg', 'Y U NO', msg.match[1], (url) ->
       msg.send url
 
-  robot.respond /WONKA (.*)\s*How trite.\s*(.*)/i, (msg) ->
+  robot.respond /boatcat (.*)\s* \|\s*(.*)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/src_images/LPTw8A', msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /wonka (.*)\s* \|\s*(.*)/i, (msg) ->
     memeGenerator msg, 'http://memecaptain.com/src_images/Mp3Hwg', msg.match[1], msg.match[2], (url) ->
       msg.send url
 
@@ -58,7 +63,7 @@ module.exports = (robot) ->
     memeGenerator msg, 'http://memecaptain.com/most_interesting.jpg', msg.match[1], msg.match[2], (url) ->
       msg.send url
 
-  robot.respond /(.*)(SUCCESS|NAILED IT.*)/i, (msg) ->
+  robot.respond /successkid (.*)\s* \|\s*(.*)/i, (msg) ->
     memeGenerator msg, 'http://memecaptain.com/success_kid.jpg', msg.match[1], msg.match[2], (url) ->
       msg.send url
 
