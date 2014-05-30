@@ -41,7 +41,6 @@
 #   bobanj
 
 module.exports = (robot) ->
-
   robot.respond /Y U NO (.+)/i, (msg) ->
     memeGenerator msg, 'http://memecaptain.com/src_images/NryNmg', 'Y U NO', msg.match[1], (url) ->
       msg.send url
