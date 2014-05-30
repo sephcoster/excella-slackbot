@@ -26,6 +26,15 @@
 #   hubot WHAT IF I TOLD YOU <text> - Morpheus What if I told you
 #   hubot Good News Everyone! <text> - Futurama Good News
 #   hubot WONKA <text> | <text> - Condescending Wonka.
+#   hubot firstworldproblems <text> | <text> - First World Problems
+#   hubot scumbagsteve <text> | <text> - Scumbag Steve
+#   hubot grandma <text> | <text> - Grandma Internet n00b
+#   hubot goodguygreg <text> | <text> - Good Guy Greg
+#   hubot theysaid <text> | <text> - They Said AKA Laundry Room Viking
+#   hubot badluckbrian <text> | <text> - Bad luck Brian
+#   hubot angrywalter <text> | <text> - Angry Walter
+#   hubot sociallyawesomeawkwardpenguin <text> | <text> - Socially Awesome/Awkward Penguin
+#   hubot firstdayontheinternetkid <text> | <text> - First Day on the Internet Kid
 #
 # Author:
 #   bobanj
@@ -118,6 +127,44 @@ module.exports = (robot) ->
   robot.respond /WHAT IF I TOLD YOU (.*)/i, (msg) ->
     memeGenerator msg, 'http://memecaptain.com/src_images/fWle1w.png', 'WHAT IF I TOLD YOU', msg.match[1], (url) ->
       msg.send url
+
+  robot.respond /scumbagsteve (.*)\s* \|\s*(.*)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/scumbag_steve.jpg', msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /angrywalter (.*)\s* \|\s*(.*)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/walter.jpg', msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /badluckbrian (.*)\s* \|\s*(.*)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/bad_luck_brian.jpg', msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /theysaid (.*)\s* \|\s*(.*)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/laundry_room_viking.jpg', msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /goodguygreg (.*)\s* \|\s*(.*)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/good_guy_greg.jpg', msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /grandma (.*)\s* \|\s*(.*)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/grandma.jpg', msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /firstworldproblems (.*)\s* \|\s*(.*)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/first_world_problems.jpg', msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /firstdayontheinternetkid (.*)\s* \|\s*(.*)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/first_day_on_the_internet_kid.jpg', msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+  robot.respond /sociallyawesomeawkwardpenguin (.*)\s* \|\s*(.*)/i, (msg) ->
+    memeGenerator msg, 'http://memecaptain.com/socially_awesome_awkward_penguin.jpg', msg.match[1], msg.match[2], (url) ->
+      msg.send url
+
+
 
 memeGenerator = (msg, imageName, text1, text2, callback) ->
   imageUrl = imageName
