@@ -175,7 +175,7 @@ module.exports = (robot) ->
     memeGenerator msg, 'http://memecaptain.com/src_images/hJpgDA', msg.match[1], msg.match[2], (url) ->
       msg.send url
 
-  robot.respond /confessionbear (.*)\s* \|\s*(.*)/i, (msg) ->
+  robot.respond /guaranteeit (.*)\s* \|\s*(.*)/i, (msg) ->
     memeGenerator msg, 'http://memecaptain.com/src_images/Qgq7bg', msg.match[1], msg.match[2], (url) ->
       msg.send url
 
