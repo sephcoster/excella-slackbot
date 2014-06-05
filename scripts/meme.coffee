@@ -36,6 +36,7 @@
 #   hubot confessionbear <text> | <text> - Confession Bear
 #   hubot lumberg <text> | <text> - Lumberg
 #   hubot guaranteeit <text> - I Guarantee It
+#   hubot boatcat <text> | <text> - I should buy a boat cat.
 #
 # Author:
 #   bobanj
