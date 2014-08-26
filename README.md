@@ -1,5 +1,4 @@
 # Hubot for Excella, on Slack
-[ ![Codeship Status for sephcoster/excella-slackbot](https://www.codeship.io/projects/459b83e0-0f76-0132-b1e6-2adccd441bb2/status)](https://www.codeship.io/projects/32633)
 
 This particular flavor of Hubot was designed to be deployed to Heroku to support a Slack chat instance for @ExcellaCo.
 
@@ -11,6 +10,8 @@ To view existing integrations and configure them, please go to [Subdomain].slack
 Thought the TinySpeck instructions allow you to specify a name, it is key to use the name provided to you by the Slack integrations console - in our case, the bot would not work unless it was integrated with Slackbot, and named the same.
 
 To test locally, make sure Redis is installed `brew redis`, then start the local redis server using `redis-server /usr/local/etc/redis.conf`.
+
+[ ![Codeship Status for sephcoster/excella-slackbot](https://www.codeship.io/projects/459b83e0-0f76-0132-b1e6-2adccd441bb2/status)](https://www.codeship.io/projects/32633)
 
 Next, in the bot directory, run `bin/hubot`.
 
