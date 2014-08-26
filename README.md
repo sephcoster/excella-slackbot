@@ -1,4 +1,5 @@
 # Hubot for Excella, on Slack
+[ ![Codeship Status for sephcoster/excella-slackbot](https://www.codeship.io/projects/459b83e0-0f76-0132-b1e6-2adccd441bb2/status)](https://www.codeship.io/projects/32633)
 
 This particular flavor of Hubot was designed to be deployed to Heroku to support a Slack chat instance for @ExcellaCo.
 
