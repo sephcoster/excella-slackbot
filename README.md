@@ -40,6 +40,10 @@ Scripts deployed to this Hubot include:
 * Look of Disapproval
 * Yoda Quotes / Pictures
 * JavaScript Eval
+* Quotes
+* BeerMe
+* ScotchMe
+* WorldCup
 
 # Custom Scripts
 We have also deployed a few custom / derivative scripts including:
