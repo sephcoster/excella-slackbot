@@ -44,11 +44,13 @@ Scripts deployed to this Hubot include:
 * BeerMe
 * ScotchMe
 * WorldCup
+* Wordnik
+* Slow Clap / Sarcastic Clap
 
 # Custom Scripts
 We have also deployed a few custom / derivative scripts including:
 * Coooperisms (Words of wisdom from one of our founders)
-* Meme_Captain (A derivative of the hubot_scripts version, with added Memes.)
+* Meme_Captain (A derivative of the hubot_scripts version, with customized Memes.)
 
 
 [See source scripts for details](https://github.com/github/hubot-scripts/tree/master/src/scripts)
