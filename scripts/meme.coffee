@@ -170,29 +170,76 @@ module.exports = (robot) ->
     memeGenerator msg, 'http://memecaptain.com/src_images/Qgq7bg', msg.match[1], 'I GUARANTEE IT', (url) ->
       msg.send url
 
-memeGenerator = (msg, imageName, text1, text2, callback) ->
-  imageUrl = imageName
+memeGeneratorUrl = 'http://memecaptain.com/gend_images'
 
+getDataPayload = (imageName, topText, botText) ->
+  data = getDataPayloadAdv(imageName, topText, botText, 0.05, 0, 0.9, 0.25, 0.05, 0.75, 0.9, 0.25)
+  return data
+
+
+getDataPayloadAdv = (imageName, topText, botText, topX, topY, topW, topH, botX, botY, botW, botH) ->
+  data = {
+    src_image_id: imageName,
+    private: true,
+    captions_attributes: [
+      {
+        text: topText,
+        top_left_x_pct: topX,
+        top_left_y_pct: topY,
+        width_pct: topW,
+        height_pct: topH
+      },
+      {
+        text: botText,
+        top_left_x_pct: botX,
+        top_left_y_pct: botY,
+        width_pct: botW,
+        height_pct: botH
+      }
+    ]
+  }
+  return JSON.stringify(data)
+
+
+memeGenerator = (msg, imageName, topText, botText, callback) ->
   processResult = (err, res, body) ->
     return msg.send err if err
-    if res.statusCode == 301
-      msg.http(res.headers.location).get() processResult
-      return
+    if res.statusCode == 303
+      callback res.headers.location
+    if res.statusCode == 202
+      timer = setInterval(->
+        msg.http(res.headers.location).get() (err, res, body) ->
+          if res.statusCode == 303
+            callback res.headers.location
+            clearInterval(timer)
+      , 2000)
     if res.statusCode > 300
-      msg.reply "Sorry, I couldn't generate that meme. Unexpected status from memecaption.com: #{res.statusCode}"
+      msg.reply "Sorry, I couldn't generate that meme. Unexpected status from memecaptain.com: #{res.statusCode}"
       return
-    try
-      result = JSON.parse(body)
-    catch error
-      msg.reply "Sorry, I couldn't generate that meme. Unexpected response from memecaptain.com: #{body}"
-    if result? and result['imageUrl']?
-      callback result['imageUrl']
-    else
-      msg.reply "Sorry, I couldn't generate that meme."
 
-  msg.http("http://memecaptain.com/g")
-  .query(
-    u: imageUrl,
-    t1: text1,
-    t2: text2
-  ).get() processResult
+  msg.http(memeGeneratorUrl)
+  .header("Content-Type", "application/json")
+  .header("Accept", "application/json")
+  .post(getDataPayload(imageName, topText, botText)) processResult
+
+
+memeGeneratorAdv = (msg, imageName, topText, botText, topX, topY, topW, topH, botX, botY, botW, botH, callback) ->
+  processResult = (err, res, body) ->
+    return msg.send err if err
+    if res.statusCode == 303
+      callback res.headers.location
+    if res.statusCode == 202
+      timer = setInterval(->
+        msg.http(res.headers.location).get() (err, res, body) ->
+          if res.statusCode == 303
+            callback res.headers.location
+            clearInterval(timer)
+      , 2000)
+    if res.statusCode > 300
+      msg.reply "Sorry, I couldn't generate that meme. Unexpected status from memecaptain.com: #{res.statusCode}"
+      return
+
+  msg.http(memeGeneratorUrl)
+  .header("Content-Type", "application/json")
+  .header("Accept", "application/json")
+  .post(getDataPayloadAdv(imageName, topText, botText, topX, topY, topW, topH, botX, botY, botW, botH)) processResult
